@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       
       getPages: AppRouting().getPages(),
-      initialRoute: NamesRoutes.home,
+      initialRoute: NamesRoutes.event_detail,
       theme: ThemeData(fontFamily: GoogleFonts.inter().fontFamily),
       locale: const Locale("en_US"),
     );

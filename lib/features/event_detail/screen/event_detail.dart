@@ -1,3 +1,4 @@
+import 'package:assignment/features/event_detail/template/event_template.dart';
 import 'package:flutter/material.dart';
 
 class EventDetail extends StatefulWidget {
@@ -10,6 +11,11 @@ class EventDetail extends StatefulWidget {
 class _EventDetailState extends State<EventDetail> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      backgroundColor: Color(0xFFffffff),
+      body: SafeArea(
+        child: EventTemplate(),
+      ),
+    );
   }
 }
