@@ -13,7 +13,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       
       getPages: AppRouting().getPages(),
-      initialRoute: NamesRoutes.event_detail,
+      // initialRoute: NamesRoutes.event_detail,
+      initialRoute: NamesRoutes.home,
+      // initialRoute: NamesRoutes.search,
       theme: ThemeData(fontFamily: GoogleFonts.inter().fontFamily),
       locale: const Locale("en_US"),
     );
