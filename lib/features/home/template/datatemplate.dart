@@ -63,7 +63,8 @@ class _CompleteDataState extends State<CompleteData> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: CachedNetworkImage(
-                          height: Dimensions.scaleH(35),
+                          height: Dimensions.scaleH(80),
+                          width: Dimensions.scaleW(60),
                           imageUrl: eventData?[index]["banner_image"],
                           placeholder: (context, url) =>
                               const CircularProgressIndicator(),
@@ -78,8 +79,9 @@ class _CompleteDataState extends State<CompleteData> {
                           children: [
                             Text(
                               dateFormatted,
-                              style: const TextStyle(
-                                color: Color(0xFF5669ff),
+                              style: TextStyle(
+                                color: const Color(0xFF5669ff),
+                                fontSize: Dimensions.scaleH(16),
                               ),
                             ),
                             Padding(
@@ -89,7 +91,8 @@ class _CompleteDataState extends State<CompleteData> {
                                 eventData?[index]["venue_name"],
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
+                                style: TextStyle(
+                                  fontSize: Dimensions.scaleH(20),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -108,8 +111,9 @@ class _CompleteDataState extends State<CompleteData> {
                                     eventData?[index]['venue_city'],
                                     softWrap: true,
                                     style: TextStyle(
-                                        color: const Color(0xFFb0b1bc),
-                                        fontSize: Dimensions.scaleH(12)),
+                                      color: const Color(0xFFb0b1bc),
+                                      fontSize: Dimensions.scaleH(15),
+                                    ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
@@ -117,7 +121,7 @@ class _CompleteDataState extends State<CompleteData> {
                                     " • ",
                                     style: TextStyle(
                                         color: const Color(0xFFb0b1bc),
-                                        fontSize: Dimensions.scaleH(12)),
+                                        fontSize: Dimensions.scaleH(15),),
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -127,7 +131,7 @@ class _CompleteDataState extends State<CompleteData> {
                                     maxLines: 2,
                                     style: TextStyle(
                                         color: const Color(0xFFb0b1bc),
-                                        fontSize: Dimensions.scaleH(12)),
+                                        fontSize: Dimensions.scaleH(15),),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ],

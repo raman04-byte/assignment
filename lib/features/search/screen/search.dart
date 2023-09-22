@@ -1,3 +1,4 @@
+import 'package:assignment/features/search/template/searchtemplate.dart';
 import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {
@@ -10,6 +11,8 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: SafeArea(child: SearchTemplate()),
+    );
   }
 }
