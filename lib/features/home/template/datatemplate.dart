@@ -37,7 +37,7 @@ class _CompleteDataState extends State<CompleteData> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: Dimensions.scaleH(20),
+        top: Dimensions.scaleH(30),
       ),
       child: FutureBuilder(
         future: readJson(),
@@ -83,7 +83,7 @@ class _CompleteDataState extends State<CompleteData> {
                               dateFormatted,
                               style: TextStyle(
                                 color: const Color(0xFF5669ff),
-                                fontSize: Dimensions.scaleH(16),
+                                fontSize: Dimensions.scaleH(14),
                               ),
                             ),
                             Padding(
@@ -94,7 +94,7 @@ class _CompleteDataState extends State<CompleteData> {
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontSize: Dimensions.scaleH(20),
+                                  fontSize: Dimensions.scaleH(15),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -107,14 +107,14 @@ class _CompleteDataState extends State<CompleteData> {
                                   Icon(
                                     Icons.location_on_rounded,
                                     color: const Color(0xFFb0b1bc),
-                                    size: Dimensions.scaleH(20),
+                                    size: Dimensions.scaleH(12),
                                   ),
                                   Text(
                                     eventData?[index]['venue_city'],
                                     softWrap: true,
                                     style: TextStyle(
                                       color: const Color(0xFFb0b1bc),
-                                      fontSize: Dimensions.scaleH(15),
+                                      fontSize: Dimensions.scaleH(12),
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -134,7 +134,7 @@ class _CompleteDataState extends State<CompleteData> {
                                     maxLines: 2,
                                     style: TextStyle(
                                       color: const Color(0xFFb0b1bc),
-                                      fontSize: Dimensions.scaleH(15),
+                                      fontSize: Dimensions.scaleH(12),
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
