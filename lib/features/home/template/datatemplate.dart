@@ -66,8 +66,10 @@ class _CompleteDataState extends State<CompleteData> {
                           height: Dimensions.scaleH(80),
                           width: Dimensions.scaleW(60),
                           imageUrl: eventData?[index]["banner_image"],
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),
                         ),
@@ -120,8 +122,9 @@ class _CompleteDataState extends State<CompleteData> {
                                     softWrap: true,
                                     " • ",
                                     style: TextStyle(
-                                        color: const Color(0xFFb0b1bc),
-                                        fontSize: Dimensions.scaleH(15),),
+                                      color: const Color(0xFFb0b1bc),
+                                      fontSize: Dimensions.scaleH(15),
+                                    ),
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -130,8 +133,9 @@ class _CompleteDataState extends State<CompleteData> {
                                     softWrap: true,
                                     maxLines: 2,
                                     style: TextStyle(
-                                        color: const Color(0xFFb0b1bc),
-                                        fontSize: Dimensions.scaleH(15),),
+                                      color: const Color(0xFFb0b1bc),
+                                      fontSize: Dimensions.scaleH(15),
+                                    ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ],
