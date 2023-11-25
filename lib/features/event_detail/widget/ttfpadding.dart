@@ -1,10 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants/assets.dart';
 import '../../../constants/dimens.dart';
 
 class TTfPadding extends StatefulWidget {
-  const TTfPadding({super.key});
+  final String title;
+  final String organizer;
+  final String organiserIcon;
+  const TTfPadding(
+      {super.key,
+      required this.title,
+      required this.organizer,
+      required this.organiserIcon});
 
   @override
   State<TTfPadding> createState() => _TTfPaddingState();
@@ -18,18 +25,22 @@ class _TTfPaddingState extends State<TTfPadding> {
         vertical: Dimensions.scaleH(10),
       ),
       child: ListTile(
-        leading: Image.asset(
-          Assets.tifIcon,
-          height: Dimensions.scaleH(60),
+        leading: CachedNetworkImage(
+          height: Dimensions.scaleH(80),
+          width: Dimensions.scaleW(60),
+          imageUrl: widget.organiserIcon,
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              CircularProgressIndicator(value: downloadProgress.progress),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         title: Text(
-          "The Internet Folks",
+          widget.title,
           style: TextStyle(
             fontSize: Dimensions.scaleH(20),
           ),
         ),
         subtitle: Text(
-          "Organizer",
+          widget.organizer,
           style: TextStyle(fontSize: Dimensions.scaleH(15)),
         ),
       ),

@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      
+
       getPages: AppRouting().getPages(),
       // initialRoute: NamesRoutes.event_detail,
       initialRoute: NamesRoutes.home,

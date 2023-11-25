@@ -2,7 +2,8 @@ import 'package:assignment/features/event_detail/template/event_template.dart';
 import 'package:flutter/material.dart';
 
 class EventDetail extends StatefulWidget {
-  const EventDetail({super.key});
+  final String id;
+  const EventDetail({super.key, required this.id});
 
   @override
   State<EventDetail> createState() => _EventDetailState();
@@ -11,10 +12,12 @@ class EventDetail extends StatefulWidget {
 class _EventDetailState extends State<EventDetail> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFFffffff),
+    return Scaffold(
+      backgroundColor: const Color(0xFFffffff),
       body: SafeArea(
-        child: EventTemplate(),
+        child: EventTemplate(
+          id: widget.id,
+        ),
       ),
     );
   }

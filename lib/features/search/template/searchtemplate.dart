@@ -1,13 +1,14 @@
 import 'dart:convert';
-
 import 'package:assignment/constants/assets.dart';
 import 'package:assignment/features/search/widget/searchtile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-
+import 'package:http/http.dart' as http;
+import '../../../constants/base_url.dart';
 import '../../../constants/dimens.dart';
+import '../../../model/event_model.dart';
 
 class SearchTemplate extends StatefulWidget {
   const SearchTemplate({super.key});
@@ -18,15 +19,32 @@ class SearchTemplate extends StatefulWidget {
 
 class _SearchTemplateState extends State<SearchTemplate> {
   final TextEditingController _controller = TextEditingController();
-  List _items = [];
   List _queryResult = [];
-  Future<List> readJson() async {
-    final String resposne = await rootBundle.loadString('assets/data.json');
-    final data = await json.decode(resposne);
-    setState(() {
-      _items = data["content"]["data"];
-    });
-    return _items;
+    List<Dataa> _data = [];
+
+  Future<List<Dataa>> getData() async {
+    try {
+      final response = await http.get(
+        Uri.parse('${BaseUrl.baseUrl}v1/event'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        _data = data["content"]["data"]
+            .map<Dataa>((json) => Dataa.fromJson(json))
+            .toList();
+        return _data;
+      }
+    } catch (e) {
+      const snackbar = SnackBar(
+        content: Text("Problem from our side or check your connection"),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      debugPrint("Error: $e");
+    }
+    return _data;
   }
 
   String formatDateTime(String inputDateTime) {
@@ -38,9 +56,9 @@ class _SearchTemplateState extends State<SearchTemplate> {
 
   void filterSearchResult(String query) {
     setState(() {
-      _queryResult = _items
+      _queryResult = _data
           .where((element) =>
-              element["venue_name"].toLowerCase().contains(query.toLowerCase()))
+              element.venueName!.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
   }
@@ -80,7 +98,7 @@ class _SearchTemplateState extends State<SearchTemplate> {
                   top: Dimensions.scaleH(20),
                 ),
                 child: FutureBuilder(
-                  future: readJson(),
+                  future: getData(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       final eventData = snapshot.data;
@@ -90,7 +108,7 @@ class _SearchTemplateState extends State<SearchTemplate> {
                         itemCount: _queryResult.length,
                         itemBuilder: (context, index) {
                           final dateFormatted =
-                              formatDateTime(eventData?[index]["date_time"]);
+                              formatDateTime('${eventData?[index].dateTime}');
                           return Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -105,7 +123,7 @@ class _SearchTemplateState extends State<SearchTemplate> {
                                   child: CachedNetworkImage(
                                     height: Dimensions.scaleH(80),
                                     width: Dimensions.scaleW(60),
-                                    imageUrl: eventData?[index]["banner_image"],
+                                    imageUrl: '${eventData?[index].bannerImage}',
                                     placeholder: (context, url) =>
                                         const CircularProgressIndicator(),
                                     errorWidget: (context, url, error) =>
@@ -129,7 +147,7 @@ class _SearchTemplateState extends State<SearchTemplate> {
                                         padding: EdgeInsets.symmetric(
                                             vertical: Dimensions.scaleH(2)),
                                         child: Text(
-                                          eventData?[index]["venue_name"],
+                                          '${eventData?[index].venueName}',
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(

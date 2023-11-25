@@ -4,7 +4,10 @@ import '../../../constants/assets.dart';
 import '../../../constants/dimens.dart';
 
 class LocationComplete extends StatefulWidget {
-  const LocationComplete({super.key});
+  final String city;
+  final String country;
+  const LocationComplete(
+      {super.key, required this.city, required this.country});
 
   @override
   State<LocationComplete> createState() => _LocationCompleteState();
@@ -27,7 +30,7 @@ class _LocationCompleteState extends State<LocationComplete> {
             left: Dimensions.scaleW(4),
           ),
           child: Text(
-            "Gala Convention Center",
+            widget.city,
             style: TextStyle(
               fontSize: Dimensions.scaleH(20),
             ),
@@ -39,7 +42,7 @@ class _LocationCompleteState extends State<LocationComplete> {
             top: Dimensions.scaleH(4),
           ),
           child: Text(
-            "36 Guild Street London, UK ",
+            widget.country,
             style: TextStyle(fontSize: Dimensions.scaleH(15)),
           ),
         ),
